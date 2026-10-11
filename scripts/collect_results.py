@@ -104,7 +104,6 @@ def main():
     _write_repetition_table(tables)
 
     # ------------------------------------------------------ prefix compare
-    _write_prefix_compare_table(tables)
 
     # -------------------------------------------------------------- macros
     _write_macros(tables, records)
@@ -400,65 +399,6 @@ def _write_keyword_freq_table(tables):
     (tables / "keyword_freq.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def _write_year_table(tables):
-    """Year mentions, ascending.  A figure would show the shape better; kept as
-    a table until the figure pass so nothing is lost in the meantime."""
-    path = RESULTS_DIR / "topic_diagnostics.json"
-    if not path.exists():
-        return
-    data = json.loads(path.read_text(encoding="utf-8"))
-    years = data["years"]
-    top = sorted(years["top_years"][:6])            # ascending, not by count
-    total = years["total_mentions"]
-
-    lines = [
-        r"\begin{table}[t]",
-        r"\centering",
-        r"\scriptsize",
-        r"\caption{训练集中提及的年份（取提及最多的六年后按年份升序排列），"
-        r"以及它们在全部 \resultYearTotal{} 次年份提及中的占比。}",
-        r"\label{tab:years}",
-        r"\begin{tabular}{l" + "r" * len(top) + "}",
-        r"\toprule",
-        "年份 & " + " & ".join(year for year, _ in top) + r" \\",
-        r"\midrule",
-        "提及次数 & " + " & ".join(f"{count:,}" for _, count in top) + r" \\",
-        r"占比（\%） & " + " & ".join(f"{count / total * 100:.1f}" for _, count in top) + r" \\",
-        r"\bottomrule", r"\end{tabular}", r"\end{table}",
-    ]
-    (tables / "years.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")
-
-
-def _diagnostics_macros():
-    """Numbers from topic_diagnostics.json that the prose quotes."""
-    path = RESULTS_DIR / "topic_diagnostics.json"
-    if not path.exists():
-        return {}
-    data = json.loads(path.read_text(encoding="utf-8"))
-    out = {}
-    for pair, macro_name in (("business|politics", "resultOverlapBizPol"),
-                             ("business|sports", "resultOverlapBizSpo"),
-                             ("politics|sports", "resultOverlapPolSpo")):
-        if pair in data["top_term_overlap"]:
-            out[macro_name] = str(len(data["top_term_overlap"][pair]))
-    counts = data["keyword_frequencies"]
-    if counts:
-        lowest = min(counts.values())
-        out["resultMinKeywordFreq"] = f"{lowest:,}".replace(",", "{,}")
-        out["resultMinKeywordMultiple"] = str(lowest // 5)
-    doc_freq = data.get("keyword_document_frequencies") or {}
-    if doc_freq:
-        out["resultMinKeywordDocFreq"] = f"{min(doc_freq.values()):,}".replace(",", "{,}")
-    years = data["years"]
-    if years.get("top_years"):
-        out["resultYearPeak"] = years["top_years"][0][0]
-    if years.get("share_2010_2014") is not None:
-        out["resultYearShare"] = f"{years['share_2010_2014'] * 100:.1f}"
-    if years.get("total_mentions"):
-        out["resultYearTotal"] = f"{years['total_mentions']:,}".replace(",", "{,}")
-    return out
-
-
 def _write_error_table(tables):
     """Where the residual errors sit, counted in documents.
 
@@ -542,50 +482,6 @@ def _write_repetition_table(tables):
                      + " \\\\")
     lines += [r"\bottomrule", r"\end{tabular}", r"\end{table}"]
     (tables / "repeats.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")
-
-
-def _write_prefix_compare_table(tables):
-    """BERT and bag-of-words at the same prefix length.
-
-    This is the measurement that separates "the encoder is stronger" from
-    "the encoder saw less": both models read the same first N tokens, so the
-    difference at fixed N is attributable to the representation.
-    """
-    path = RESULTS_DIR / "truncation_curve.json"
-    if not path.exists():
-        return
-    bow = {p["tokens"]: p["macro_f1"]
-           for p in json.loads(path.read_text(encoding="utf-8"))["curve"]}
-    lengths = [n for n in (64, 128, 256, 512) if n in bow]
-
-    rows = []
-    for length in lengths:
-        name = "bert.json" if length == 64 else f"bert_len{length}.json"
-        bert_path = RESULTS_DIR / name
-        if not bert_path.exists():
-            continue
-        bert = json.loads(bert_path.read_text(encoding="utf-8"))["macro_f1"]
-        rows.append((length, bert, bow[length]))
-    if not rows:
-        return
-
-    lines = [
-        r"\begin{table}[t]",
-        r"\centering",
-        r"\footnotesize",
-        r"\caption{相同前缀长度下 BERT 与词袋的对比。两者读的是同一批前 $N$ 个词，"
-        r"因此差值只能归因于表示本身。}",
-        r"\label{tab:prefix}",
-        r"\begin{tabular}{rrrr}",
-        r"\toprule",
-        "前缀词数 & BERT & 词袋 & 差值 \\\\",
-        r"\midrule",
-    ]
-    for length, bert, bow_score in rows:
-        delta = round(bert, 4) - round(bow_score, 4)
-        lines.append(f"{length} & {bert:.4f} & {bow_score:.4f} & {delta:+.4f} \\\\")
-    lines += [r"\bottomrule", r"\end{tabular}", r"\end{table}"]
-    (tables / "prefix_compare.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def _prefix_macros():
