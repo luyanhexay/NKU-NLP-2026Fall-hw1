@@ -1,0 +1,38 @@
+{
+  "experiment": "trunc_16",
+  "accuracy": 0.9176062445793582,
+  "macro_f1": 0.8399293336279806,
+  "per_class_f1": {
+    "business": 0.7888446215139442,
+    "politics": 0.7725631768953068,
+    "sports": 0.9583802024746907
+  },
+  "confusion_matrix": [
+    [
+      99,
+      11,
+      27
+    ],
+    [
+      10,
+      107,
+      35
+    ],
+    [
+      5,
+      7,
+      852
+    ]
+  ],
+  "labels": [
+    "business",
+    "politics",
+    "sports"
+  ],
+  "n_test": 1153,
+  "meta": {
+    "prefix_tokens": 16,
+    "classifier": "binary BoW + LR",
+    "C": 1.0
+  }
+}

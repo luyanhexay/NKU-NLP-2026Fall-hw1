@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{真正同输入下的对比。词袋一侧按\emph{每篇文档}实际被 BERT 前缀覆盖到的词数截断，而不是按同一个名义 $N$，因为 $N$ 在两侧分别是词与子词。}
+\label{tab:matched}
+\begin{tabular}{rrrrr}
+\toprule
+BERT 前缀（子词） & 覆盖词数 & 词袋 & BERT & 差值 \\
+\midrule
+64 & 54 & 0.9338 & 0.9623 & +0.0285 \\
+128 & 108 & 0.9361 & 0.9773 & +0.0412 \\
+256 & 214 & 0.9642 & 0.9787 & +0.0145 \\
+512 & 408 & 0.9749 & 0.9823 & +0.0074 \\
+\bottomrule
+\end{tabular}
+\end{table}

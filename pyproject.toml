@@ -1,0 +1,20 @@
+[project]
+name = "nlp-hw1"
+version = "0.1.0"
+description = "NLP Course Assignment 1 — text classification with BoW / Word2Vec / BERT"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "numpy>=1.26,<2",
+    "pandas>=2.2",
+    "scikit-learn>=1.5",
+    "nltk>=3.9",
+    "gensim>=4.3.3",
+    "torch>=2.4",
+    "transformers>=4.44",
+    "matplotlib>=3.9",
+    "tqdm>=4.66",
+]
+
+# The lock file intentionally records the default PyPI index so the project
+# stays portable.  On a slow link (e.g. behind a proxy in CN), install with a
+# mirror instead:  UV_DEFAULT_INDEX=https://mirrors.aliyun.com/pypi/simple/ uv sync

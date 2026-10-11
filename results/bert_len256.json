@@ -1,0 +1,44 @@
+{
+  "experiment": "bert_len256",
+  "accuracy": 0.9913269731136166,
+  "macro_f1": 0.978690240217718,
+  "per_class_f1": {
+    "business": 0.966542750929368,
+    "politics": 0.9706840390879479,
+    "sports": 0.9988439306358381
+  },
+  "confusion_matrix": [
+    [
+      130,
+      6,
+      1
+    ],
+    [
+      2,
+      149,
+      1
+    ],
+    [
+      0,
+      0,
+      864
+    ]
+  ],
+  "labels": [
+    "business",
+    "politics",
+    "sports"
+  ],
+  "n_test": 1153,
+  "meta": {
+    "model": "google-bert/bert-base-uncased",
+    "max_length": 256,
+    "epochs": 3,
+    "batch_size": 32,
+    "learning_rate": 2e-05,
+    "truncation": "longest_first (head of the document is kept)",
+    "seed": 42,
+    "best_epoch": 3,
+    "val_macro_f1": 0.9803919589485454
+  }
+}

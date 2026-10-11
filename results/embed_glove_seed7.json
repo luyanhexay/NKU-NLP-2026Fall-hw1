@@ -1,0 +1,45 @@
+{
+  "experiment": "embed_glove_seed7",
+  "accuracy": 0.9861231569817867,
+  "macro_f1": 0.9666173019965983,
+  "per_class_f1": {
+    "business": 0.9442379182156134,
+    "politics": 0.9579288025889967,
+    "sports": 0.9976851851851852
+  },
+  "confusion_matrix": [
+    [
+      127,
+      8,
+      2
+    ],
+    [
+      4,
+      148,
+      0
+    ],
+    [
+      1,
+      1,
+      862
+    ]
+  ],
+  "labels": [
+    "business",
+    "politics",
+    "sports"
+  ],
+  "n_test": 1153,
+  "meta": {
+    "embedding": "glove.6B.100d (pre-trained, unmodified)",
+    "training_corpus": "Wikipedia 2014 + Gigaword 5 (as distributed)",
+    "vocab": 400000,
+    "dim": 100,
+    "pooling": "mean of in-vocabulary word vectors",
+    "token_coverage_train": 0.9807,
+    "train_docs_with_no_known_token": 0,
+    "classifier": "LogisticRegression(lbfgs) on standardised vectors, C tuned on val",
+    "C": 10.0,
+    "val_macro_f1": 0.9641931822120795
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "experiment": "embed_w2v_ag",
+  "accuracy": 0.98438855160451,
+  "macro_f1": 0.9603985321144991,
+  "per_class_f1": {
+    "business": 0.9377289377289377,
+    "politics": 0.9446254071661238,
+    "sports": 0.9988412514484357
+  },
+  "confusion_matrix": [
+    [
+      128,
+      9,
+      0
+    ],
+    [
+      7,
+      145,
+      0
+    ],
+    [
+      1,
+      1,
+      862
+    ]
+  ],
+  "labels": [
+    "business",
+    "politics",
+    "sports"
+  ],
+  "n_test": 1153,
+  "meta": {
+    "embedding": "Word2Vec(skip-gram) trained on AG News",
+    "training_corpus": "AG News, 90000 documents",
+    "vocab": 25376,
+    "dim": 100,
+    "pooling": "mean of in-vocabulary word vectors",
+    "token_coverage_train": 0.9426,
+    "train_docs_with_no_known_token": 0,
+    "classifier": "LogisticRegression(lbfgs) on standardised vectors, C tuned on val",
+    "C": 0.1,
+    "val_macro_f1": 0.9543394364594211
+  }
+}

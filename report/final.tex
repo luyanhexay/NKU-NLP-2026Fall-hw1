@@ -1,0 +1,37 @@
+\documentclass[11pt]{article}
+\usepackage[preprint]{acl}
+\usepackage{xeCJK}
+\setmainfont{Times New Roman}
+\setCJKmainfont{SimSun}[AutoFakeSlant=0.2, BoldFont=SimHei]
+\setCJKsansfont{SimHei}
+\setCJKmonofont{FangSong}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+\setCJKfamilyfont{hei}{SimHei}
+\newcommand{\hei}{\CJKfamily{hei}}
+\usepackage{titlesec}
+\titleformat*{\section}{\hei\large}
+\titleformat*{\subsection}{\hei\normalsize}
+\newcommand{\code}[1]{\texttt{\small #1}}
+\input{tables/macros}
+\pagestyle{empty}
+\begin{document}
+\footnotesize\input{tables/dataset}\normalsize
+\footnotesize\input{tables/task1}\normalsize
+\footnotesize\input{tables/coverage}\normalsize
+\clearpage
+\footnotesize\input{tables/errors}\normalsize
+\footnotesize\input{tables/keyword_freq}\normalsize
+\footnotesize\input{tables/discriminative}\normalsize
+\clearpage
+\scriptsize\input{tables/years}\normalsize
+\scriptsize\input{tables/matched}\normalsize
+\scriptsize\input{tables/by_length}\normalsize
+\footnotesize\input{tables/appendix}\normalsize
+\clearpage
+\end{document}

@@ -1,0 +1,21 @@
+{
+  "mean_wordpieces_per_doc": 850.9,
+  "wordpieces_to_words": {
+    "64": {
+      "mean_words": 54.0,
+      "median_words": 54
+    },
+    "128": {
+      "mean_words": 108.3,
+      "median_words": 109
+    },
+    "256": {
+      "mean_words": 213.5,
+      "median_words": 218
+    },
+    "512": {
+      "mean_words": 408.4,
+      "median_words": 436
+    }
+  }
+}

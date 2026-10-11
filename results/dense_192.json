@@ -1,0 +1,37 @@
+{
+  "experiment": "dense_192",
+  "accuracy": 0.9757155247181266,
+  "macro_f1": 0.942464670215892,
+  "per_class_f1": {
+    "business": 0.9084249084249084,
+    "politics": 0.9235880398671097,
+    "sports": 0.9953810623556582
+  },
+  "confusion_matrix": [
+    [
+      124,
+      10,
+      3
+    ],
+    [
+      10,
+      139,
+      3
+    ],
+    [
+      2,
+      0,
+      862
+    ]
+  ],
+  "labels": [
+    "business",
+    "politics",
+    "sports"
+  ],
+  "n_test": 1153,
+  "meta": {
+    "wordpieces": 192,
+    "mean_words": 161.81960104076322
+  }
+}

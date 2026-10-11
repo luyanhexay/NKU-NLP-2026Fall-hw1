@@ -1,0 +1,41 @@
+{
+  "experiment": "baseline_majority",
+  "accuracy": 0.7493495229835212,
+  "macro_f1": 0.285572632622707,
+  "per_class_f1": {
+    "business": 0.0,
+    "politics": 0.0,
+    "sports": 0.856717897868121
+  },
+  "confusion_matrix": [
+    [
+      0,
+      0,
+      137
+    ],
+    [
+      0,
+      0,
+      152
+    ],
+    [
+      0,
+      0,
+      864
+    ]
+  ],
+  "labels": [
+    "business",
+    "politics",
+    "sports"
+  ],
+  "n_test": 1153,
+  "meta": {
+    "rule": "always predict 'sports'",
+    "labels": [
+      "business",
+      "politics",
+      "sports"
+    ]
+  }
+}

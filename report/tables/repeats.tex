@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\caption{带随机性配置的重复运行，每格是一个种子的宏平均 F1。词袋与 GloVe 没有随机性，表中未列，其数值是定值。}
+\label{tab:repeats}
+\begin{tabular}{lrrr}
+\toprule
+配置 & 种子1 & 种子2 & 种子3 \\
+\midrule
+W2V（NYT） & 0.9745 & 0.9755 & 0.9710 \\
+W2V（AG News） & 0.9604 & 0.9616 & 0.9615 \\
+BERT，64 词 & 0.9623 & 0.9538 & 0.9602 \\
+BERT，512 词 & 0.9823 & 0.9787 & 0.9800 \\
+\bottomrule
+\end{tabular}
+\end{table}

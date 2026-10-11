@@ -1,0 +1,42 @@
+{
+  "experiment": "bow_binary_mindf5",
+  "accuracy": 0.9887250650477016,
+  "macro_f1": 0.9743521554318644,
+  "per_class_f1": {
+    "business": 0.9548872180451128,
+    "politics": 0.9710610932475884,
+    "sports": 0.9971081550028918
+  },
+  "confusion_matrix": [
+    [
+      127,
+      7,
+      3
+    ],
+    [
+      1,
+      151,
+      0
+    ],
+    [
+      1,
+      1,
+      862
+    ]
+  ],
+  "labels": [
+    "business",
+    "politics",
+    "sports"
+  ],
+  "n_test": 1153,
+  "meta": {
+    "representation": "binary bag-of-words",
+    "classifier": "LogisticRegression(lbfgs), C tuned on val",
+    "tokenizer": "nltk.word_tokenize",
+    "min_df": 5,
+    "vocab_size": 28938,
+    "C": 0.1,
+    "val_macro_f1": 0.9621748007402852
+  }
+}

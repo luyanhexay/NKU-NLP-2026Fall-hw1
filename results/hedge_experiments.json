@@ -1,0 +1,111 @@
+{
+  "E1_bin_composition": {
+    "<200": {
+      "business": 3,
+      "politics": 0,
+      "sports": 73
+    },
+    "200-400": {
+      "business": 11,
+      "politics": 9,
+      "sports": 81
+    },
+    "400-700": {
+      "business": 44,
+      "politics": 31,
+      "sports": 229
+    },
+    "700-1000": {
+      "business": 52,
+      "politics": 82,
+      "sports": 330
+    },
+    ">1000": {
+      "business": 27,
+      "politics": 30,
+      "sports": 151
+    }
+  },
+  "E6_bert_sports_errors": {
+    "n_sports_docs": 864,
+    "n_errors": 9,
+    "predicted_as": {
+      "business": 5,
+      "politics": 4
+    }
+  },
+  "E3_train_test_gap": {
+    "glove": {
+      "train_accuracy": 0.991209983722192,
+      "test_accuracy": 0.9861231569817867,
+      "test_over_train": 0.994868063453817
+    },
+    "w2v_nyt_train_only": {
+      "train_accuracy": 0.9873033098209442,
+      "test_accuracy": 0.9887250650477016,
+      "test_over_train": 1.0014400389552176
+    }
+  },
+  "E4_class_separation": {
+    "glove": {
+      "between_over_within": 0.3220966042742796
+    },
+    "w2v_nyt": {
+      "between_over_within": 0.3435115133354963
+    },
+    "w2v_ag": {
+      "between_over_within": 0.33726748096583525
+    }
+  },
+  "E5_word_positions": {
+    "business": {
+      "docs": 137,
+      "anything_past_64": 137,
+      "first_hit_past_64": 20,
+      "hits_in_head": 413,
+      "hits_total": 4237,
+      "doc_share_with_hits_past_64": 1.0,
+      "hit_share_in_first_64": 0.09747462827472268
+    },
+    "politics": {
+      "docs": 152,
+      "anything_past_64": 152,
+      "first_hit_past_64": 17,
+      "hits_in_head": 551,
+      "hits_total": 4754,
+      "doc_share_with_hits_past_64": 1.0,
+      "hit_share_in_first_64": 0.11590239798064787
+    },
+    "sports": {
+      "docs": 864,
+      "anything_past_64": 859,
+      "first_hit_past_64": 27,
+      "hits_in_head": 3705,
+      "hits_total": 33207,
+      "doc_share_with_hits_past_64": 0.9942129629629629,
+      "hit_share_in_first_64": 0.11157286114373476
+    }
+  },
+  "E2_dense_curve": [
+    {
+      "wordpieces": 64,
+      "mean_words": 53.976582827406766,
+      "bow_macro_f1": 0.9338042879265068
+    },
+    {
+      "wordpieces": 96,
+      "mean_words": 81.17692974848222,
+      "bow_macro_f1": 0.9456863421610967
+    },
+    {
+      "wordpieces": 128,
+      "mean_words": 108.30268863833479,
+      "bow_macro_f1": 0.9361476859356191
+    },
+    {
+      "wordpieces": 192,
+      "mean_words": 161.81960104076322,
+      "bow_macro_f1": 0.942464670215892
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "experiment": "matched_512",
+  "accuracy": 0.98959236773634,
+  "macro_f1": 0.9749013923293962,
+  "per_class_f1": {
+    "business": 0.9584905660377359,
+    "politics": 0.967948717948718,
+    "sports": 0.9982648930017352
+  },
+  "confusion_matrix": [
+    [
+      127,
+      9,
+      1
+    ],
+    [
+      0,
+      151,
+      1
+    ],
+    [
+      1,
+      0,
+      863
+    ]
+  ],
+  "labels": [
+    "business",
+    "politics",
+    "sports"
+  ],
+  "n_test": 1153,
+  "meta": {
+    "bert_prefix_wordpieces": 512,
+    "mean_words_seen": 408.4,
+    "classifier": "binary BoW + LR, truncated per document"
+  }
+}

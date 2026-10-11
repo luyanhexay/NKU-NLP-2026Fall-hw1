@@ -1,0 +1,14 @@
+\begin{table*}[t]
+\centering
+\footnotesize
+\caption{Task 1 的结果（末列为验证集，其余为测试集）。两种表示共用同一份含 \resultVocabSize{} 个词的训练词表，区别只在每个位置上存什么值。}
+\label{tab:task1}
+\begin{tabular}{lrrrr}
+\toprule
+表示方法 & $C$ & 准确率 & 宏平均 F1 & 验证集宏平均 F1 \\
+\midrule
+二值词袋 & 0.1 & 0.9887 & 0.9744 & 0.9610 \\
+词频词袋 & 1 & 0.9887 & 0.9728 & 0.9705 \\
+\bottomrule
+\end{tabular}
+\end{table*}

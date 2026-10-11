@@ -1,0 +1,15 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\caption{每个类别权重最高的 50 个词中任意两类的交集大小。这里的词表未剔除任何通用词，唯一的非零交集 \emph{mr.} 正是这一类词；表 \ref{tab:keyword-freq} 用的则是剔除后的词表。对角线是类别与自身，最右列各给两个例词。}
+\label{tab:discriminative}
+\begin{tabular}{lccc@{\hspace{8pt}}l}
+\toprule
+类别 & 财经 & 政治 & 体育 & 例词 \\
+\midrule
+财经 & -- & 1 & 0 & company、companies \\
+政治 & 1 & -- & 0 & washington、republican \\
+体育 & 0 & 0 & -- & players、league \\
+\bottomrule
+\end{tabular}
+\end{table}

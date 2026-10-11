@@ -1,0 +1,380 @@
+{
+  "top_terms_per_class": {
+    "business": [
+      "company",
+      "mr.",
+      "companies",
+      "market",
+      "its",
+      "chief",
+      "european",
+      "flight",
+      "bank",
+      "billion",
+      "business",
+      "industry",
+      "large",
+      "percent",
+      "or",
+      "consumers",
+      "consumer",
+      "economic",
+      "measures",
+      "new"
+    ],
+    "politics": [
+      "mr.",
+      "washington",
+      "state",
+      "republican",
+      "obama",
+      "law",
+      "senator",
+      "officials",
+      "republicans",
+      "military",
+      "care",
+      "senate",
+      "house",
+      "ms.",
+      "county",
+      "police",
+      "congress",
+      "government",
+      "gov",
+      "lawmakers"
+    ],
+    "sports": [
+      "players",
+      "league",
+      "season",
+      "game",
+      "team",
+      "player",
+      "football",
+      "play",
+      "games",
+      "sports",
+      "played",
+      "coach",
+      "club",
+      "won",
+      "cup",
+      "playing",
+      "fans",
+      "teams",
+      "stadium",
+      "tournament"
+    ]
+  },
+  "top_term_overlap": {
+    "business|politics": [
+      "mr."
+    ],
+    "business|sports": [],
+    "politics|sports": []
+  },
+  "top_term_count": 50,
+  "frequent_vocab_sizes": {
+    "business": 2401,
+    "politics": 2401,
+    "sports": 2401
+  },
+  "keyword_frequencies": {
+    "company": 2541,
+    "companies": 1409,
+    "market": 1558,
+    "chief": 1341,
+    "washington": 2937,
+    "republican": 1466,
+    "obama": 2225,
+    "law": 1844,
+    "players": 7577,
+    "league": 7284,
+    "season": 11719,
+    "game": 17234
+  },
+  "keyword_document_frequencies": {
+    "company": 924,
+    "companies": 598,
+    "market": 752,
+    "chief": 945,
+    "washington": 1743,
+    "republican": 503,
+    "obama": 649,
+    "law": 801,
+    "players": 3202,
+    "league": 3021,
+    "season": 4494,
+    "game": 5013
+  },
+  "keyword_selection": {
+    "rule": "highest logistic-regression weight per class",
+    "per_class": 4,
+    "chosen": {
+      "business": [
+        "company",
+        "companies",
+        "market",
+        "chief"
+      ],
+      "politics": [
+        "washington",
+        "republican",
+        "obama",
+        "law"
+      ],
+      "sports": [
+        "players",
+        "league",
+        "season",
+        "game"
+      ]
+    }
+  },
+  "years": {
+    "top_years": [
+      [
+        "2011",
+        1191
+      ],
+      [
+        "2012",
+        1007
+      ],
+      [
+        "2010",
+        883
+      ],
+      [
+        "2008",
+        573
+      ],
+      [
+        "2009",
+        564
+      ],
+      [
+        "2013",
+        550
+      ],
+      [
+        "2014",
+        419
+      ],
+      [
+        "2007",
+        417
+      ],
+      [
+        "2006",
+        314
+      ],
+      [
+        "2004",
+        282
+      ],
+      [
+        "2005",
+        252
+      ],
+      [
+        "2001",
+        215
+      ]
+    ],
+    "all_years": [
+      [
+        "1980",
+        49
+      ],
+      [
+        "1981",
+        35
+      ],
+      [
+        "1982",
+        47
+      ],
+      [
+        "1983",
+        44
+      ],
+      [
+        "1984",
+        42
+      ],
+      [
+        "1985",
+        54
+      ],
+      [
+        "1986",
+        55
+      ],
+      [
+        "1987",
+        61
+      ],
+      [
+        "1988",
+        52
+      ],
+      [
+        "1989",
+        45
+      ],
+      [
+        "1990",
+        64
+      ],
+      [
+        "1991",
+        47
+      ],
+      [
+        "1992",
+        82
+      ],
+      [
+        "1993",
+        48
+      ],
+      [
+        "1994",
+        102
+      ],
+      [
+        "1995",
+        104
+      ],
+      [
+        "1996",
+        152
+      ],
+      [
+        "1997",
+        96
+      ],
+      [
+        "1998",
+        139
+      ],
+      [
+        "1999",
+        108
+      ],
+      [
+        "2000",
+        155
+      ],
+      [
+        "2001",
+        215
+      ],
+      [
+        "2002",
+        202
+      ],
+      [
+        "2003",
+        207
+      ],
+      [
+        "2004",
+        282
+      ],
+      [
+        "2005",
+        252
+      ],
+      [
+        "2006",
+        314
+      ],
+      [
+        "2007",
+        417
+      ],
+      [
+        "2008",
+        573
+      ],
+      [
+        "2009",
+        564
+      ],
+      [
+        "2010",
+        883
+      ],
+      [
+        "2011",
+        1191
+      ],
+      [
+        "2012",
+        1007
+      ],
+      [
+        "2013",
+        550
+      ],
+      [
+        "2014",
+        419
+      ],
+      [
+        "2015",
+        98
+      ],
+      [
+        "2016",
+        130
+      ],
+      [
+        "2017",
+        32
+      ],
+      [
+        "2018",
+        42
+      ],
+      [
+        "2019",
+        6
+      ],
+      [
+        "2020",
+        45
+      ],
+      [
+        "2021",
+        7
+      ],
+      [
+        "2022",
+        48
+      ],
+      [
+        "2023",
+        4
+      ],
+      [
+        "2024",
+        2
+      ],
+      [
+        "2025",
+        3
+      ],
+      [
+        "2026",
+        1
+      ]
+    ],
+    "total_mentions": 9075,
+    "share_2012_2014": 0.2177,
+    "share_2010_2014": 0.4463
+  }
+}

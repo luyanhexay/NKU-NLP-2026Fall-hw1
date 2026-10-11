@@ -1,0 +1,39 @@
+\documentclass[11pt]{article}
+\usepackage[preprint]{acl}
+\usepackage{xeCJK}
+\setmainfont{Times New Roman}
+\setCJKmainfont{SimSun}[AutoFakeSlant=0.2, BoldFont=SimHei]
+\setCJKsansfont{SimHei}
+\setCJKmonofont{FangSong}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+\setCJKfamilyfont{hei}{SimHei}
+\newcommand{\hei}{\CJKfamily{hei}}
+\usepackage{titlesec}
+\titleformat*{\section}{\hei\large}
+\titleformat*{\subsection}{\hei\normalsize}
+\newcommand{\code}[1]{\texttt{\small #1}}
+\input{tables/macros}
+\pagestyle{empty}
+\begin{document}
+\section*{表 2 / 表 3}
+\input{tables/task1}
+\input{tables/coverage}
+\clearpage
+\section*{表 4 / 表 5 / 表 6}
+\input{tables/results}
+\input{tables/errors}
+\input{tables/repeats}
+\clearpage
+\section*{表 9 / 表 10 / 表 11 / 表 13}
+\input{tables/truncation}
+\input{tables/matched}
+\input{tables/by_length}
+\input{tables/appendix}
+\clearpage
+\end{document}

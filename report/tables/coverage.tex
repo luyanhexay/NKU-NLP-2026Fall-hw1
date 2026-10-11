@@ -1,0 +1,15 @@
+\begin{table*}[t]
+\centering
+\footnotesize
+\caption{三种词向量对 NYT 训练集的覆盖率。覆盖率界定每种词向量能起作用的范围：一篇文档若所有词都不在词表中，其文档向量会退化为零向量，而三种词向量下这样的文档数都是零。}
+\label{tab:coverage}
+\begin{tabular}{lrr}
+\toprule
+词向量来源 & 词表规模 & 词元覆盖率 \\
+\midrule
+GloVe 6B & 400,000 & 0.9807 \\
+Word2Vec（AG News） & 25,376 & 0.9426 \\
+Word2Vec（NYT） & 31,574 & 0.9795 \\
+\bottomrule
+\end{tabular}
+\end{table*}

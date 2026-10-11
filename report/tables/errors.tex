@@ -1,0 +1,15 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\caption{测试集上误差的归属（单位：篇），\emph{按真实类别分组}：三列分别是真实为财经、政治、体育的文档中被误判到其他类的篇数，一格一个数。图 \ref{fig:confusions} 按行归一化展示，比例会被类别规模掩盖，这里换算成篇数。}
+\label{tab:errors}
+\begin{tabular}{lrrr}
+\toprule
+配置 & 财经 & 政治 & 体育 \\
+\midrule
+BERT（64 子词） & 7 & 5 & 9 \\
+二值词袋 & 10 & 1 & 2 \\
+W2V（AG） & 9 & 7 & 2 \\
+\bottomrule
+\end{tabular}
+\end{table}

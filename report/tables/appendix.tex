@@ -1,0 +1,15 @@
+\begin{table*}[h]
+\centering
+\footnotesize
+\caption{附录实验。前两行把 Task 1 的 \texttt{min\_df} 改为 5；最后一行把 BERT 的截断长度改为 512，用于把表示能力与截断的代价分开。}
+\label{tab:appendix}
+\begin{tabular}{lrrr}
+\toprule
+配置 & $\lvert V \rvert$ & 准确率 & 宏平均 F1 \\
+\midrule
+二值词袋，min\_df=5 & 28,938 & 0.9887 & 0.9744 \\
+词频词袋，min\_df=5 & 28,938 & 0.9887 & 0.9745 \\
+BERT，max\_len 512 & -- & 0.9931 & 0.9823 \\
+\bottomrule
+\end{tabular}
+\end{table*}

@@ -1,0 +1,11 @@
+task,experiment,result_file,accuracy,macro_f1,f1_business,f1_politics,f1_sports
+参照,平凡基线（全猜 sports）,baseline_majority,0.7493,0.2856,0.0,0.0,0.8567
+Task 1,二值词袋,bow_binary,0.9887,0.9744,0.9549,0.9711,0.9971
+Task 1,词频词袋,bow_freq,0.9887,0.9728,0.9591,0.961,0.9983
+Task 2,GloVe 6B（100 维）,embed_glove,0.9861,0.9666,0.9442,0.9579,0.9977
+Task 2,W2V（AG News，100 维）,embed_w2v_ag,0.9844,0.9604,0.9377,0.9446,0.9988
+Task 2,W2V（NYT，100 维）,embed_w2v_nyt,0.9905,0.9745,0.9591,0.9644,1.0
+Task 3,BERT-base（64 子词，3 轮）,bert,0.9818,0.9623,0.9386,0.9545,0.9936
+附录,二值词袋（min_df=5）,bow_binary_mindf5,0.9887,0.9744,0.9549,0.9711,0.9971
+附录,词频词袋（min_df=5）,bow_freq_mindf5,0.9887,0.9745,0.9588,0.9675,0.9971
+附录,BERT-base（512 子词，3 轮）,bert_len512,0.9931,0.9823,0.9704,0.9772,0.9994

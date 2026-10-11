@@ -1,0 +1,28 @@
+\begin{table}[t]
+\centering
+\footnotesize
+\caption{每个类别中跳过少量通用词后权重最高的四个词，及其在 9{,}215 篇训练文档中的\emph{出现次数}与\emph{出现文档数}，末行给出各自的门槛（前者是 Task 2 的 \code{min\_count}，后者是附录的 \code{min\_df}）。词序是模型的权重序，不是频次序。}
+\label{tab:keyword-freq}
+\begin{tabular}{llrr}
+\toprule
+类别 & 词 & 次数 & 篇数 \\
+\midrule
+体育 & \emph{players} & 7,577 & 3,202 \\
+ & \emph{league} & 7,284 & 3,021 \\
+ & \emph{season} & 11,719 & 4,494 \\
+ & \emph{game} & 17,234 & 5,013 \\
+\midrule
+政治 & \emph{washington} & 2,937 & 1,743 \\
+ & \emph{republican} & 1,466 & 503 \\
+ & \emph{obama} & 2,225 & 649 \\
+ & \emph{law} & 1,844 & 801 \\
+\midrule
+财经 & \emph{company} & 2,541 & 924 \\
+ & \emph{companies} & 1,409 & 598 \\
+ & \emph{market} & 1,558 & 752 \\
+ & \emph{chief} & 1,341 & 945 \\
+\midrule
+门槛 & -- & 5 & 5 \\
+\bottomrule
+\end{tabular}
+\end{table}

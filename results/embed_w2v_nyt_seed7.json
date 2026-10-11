@@ -1,0 +1,46 @@
+{
+  "experiment": "embed_w2v_nyt_seed7",
+  "accuracy": 0.9904596704249783,
+  "macro_f1": 0.9755179916903444,
+  "per_class_f1": {
+    "business": 0.9629629629629629,
+    "politics": 0.9641693811074918,
+    "sports": 0.9994216310005783
+  },
+  "confusion_matrix": [
+    [
+      130,
+      7,
+      0
+    ],
+    [
+      3,
+      148,
+      1
+    ],
+    [
+      0,
+      0,
+      864
+    ]
+  ],
+  "labels": [
+    "business",
+    "politics",
+    "sports"
+  ],
+  "n_test": 1153,
+  "meta": {
+    "embedding": "Word2Vec(skip-gram) trained on NYT",
+    "training_corpus": "NYT training split only (9215 documents)",
+    "vocab": 31574,
+    "w2v_seed": 7,
+    "dim": 100,
+    "pooling": "mean of in-vocabulary word vectors",
+    "token_coverage_train": 0.9795,
+    "train_docs_with_no_known_token": 0,
+    "classifier": "LogisticRegression(lbfgs) on standardised vectors, C tuned on val",
+    "C": 0.1,
+    "val_macro_f1": 0.958410209921968
+  }
+}
