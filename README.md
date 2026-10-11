@@ -1,76 +1,62 @@
-# NLP Course Assignment 1 — Text Classification
+# 自然语言处理 作业一：文本分类
 
-Three families of document representation compared on a three-class New York
-Times classification task: bag-of-words, mean-pooled word embeddings, and a
-fine-tuned BERT.  The report is `report/main.pdf`; its source is
-`report/main.tex`.
+在 NYT 三分类任务上比较六种文本表示：二值词袋、词频词袋、预训练 GloVe 6B、
+在 AG News 上训练的 Word2Vec、在 NYT 上训练的 Word2Vec，以及微调的 BERT。
+除 BERT 外统一搭配逻辑回归。
 
-## What is here
+## 文件在哪
 
-```
-src/                     shared library
-  config.py              paths, the global seed, the class order
-  data.py                reads the split written to disk
-  text.py                nltk tokenisation, cached
-  features.py            BoW vectorisers, GloVe loading, mean pooling
-  linear.py              logistic regression with C chosen on validation
-  metrics.py             accuracy + macro-F1, one JSON per experiment
-scripts/
-  make_splits.py         writes the single shared 80/10/10 split
-  task1_bow.py           Task 1 — binary and word-frequency BoW
-  task2_embed.py         Task 2 — GloVe / Word2Vec on AG News / on NYT
-  task3_bert.py          Task 3 — bert-base-uncased fine-tuning
-  truncation_curve.py    macro-F1 against prefix length, representation fixed
-  prefix_units.py        wordpieces-to-words conversion for the BERT prefixes
-  matched_prefix.py      BERT vs BoW on the same words *per document*
-  error_analysis.py      error rates by document length + a worked example
-  hedge_experiments.py   six small measurements that replace six hedges
-  topic_diagnostics.py   vocabulary overlap, keyword frequency, year mentions
-  collect_results.py     results/ -> report tables and macros
-  make_figs.py           results/ -> report figures
-  build_report.sh        regenerate the generated inputs, then compile the PDF
-results/                 one JSON per experiment (the evidence)
-report/                  LaTeX source, generated tables, figures
-```
+| 想看什么 | 去哪里 |
+| --- | --- |
+| 实验报告（成品 PDF，英文） | `report/main.pdf` |
+| 报告源码（LaTeX） | `report/main.tex` |
+| 代码 | `src/` 公共库，`scripts/` 每个实验一个脚本 |
+| 全部实验结果 | `results/`，每个实验一份 JSON |
+| 数据划分 | `splits/meta.json`，含种子与三个集合的精确索引 |
 
-## Setup
+报告里的**每一个数字都由 `scripts/collect_results.py` 从 `results/` 生成**，
+没有手抄；图表同理。
 
-Requires Python 3.12 and [uv](https://docs.astral.sh/uv/).
+## 要求的任务
 
-```bash
-uv sync
-```
+| 任务 | 配置 | 准确率 | 宏平均 F1 |
+| --- | --- | --- | --- |
+| 参照 | 永远预测体育 | 0.7493 | 0.2856 |
+| Task 1 | 二值词袋 | 0.9887 | 0.9744 |
+| Task 1 | 词频词袋 | 0.9887 | 0.9728 |
+| Task 2 | GloVe 6B（100 维） | 0.9861 | 0.9666 |
+| Task 2 | Word2Vec（AG News，100 维） | 0.9844 | 0.9604 |
+| Task 2 | Word2Vec（NYT，100 维） | 0.9905 | 0.9745 |
+| Task 3 | BERT（max_length=64，3 epochs） | 0.9818 | 0.9623 |
 
-The lock file points at the default PyPI index.  On a slow link (for example
-behind a proxy in mainland China, where PyPI itself often stalls), install
-through a mirror instead:
+六组共用同一份 80/10/10 划分，均在 NYT 测试集（1,153 篇）上评价。
 
-```bash
-UV_DEFAULT_INDEX=https://mirrors.aliyun.com/pypi/simple/ uv sync
-```
+**最值得看的一条结论**：作业规定的 `max_length=64` 使 BERT 只读到每篇文档的
+头部（词元数中位数 768），这是它排名偏低的成因。把截断放宽到 512 子词、其余
+不变，宏平均 F1 由 0.9623 升到 0.9823，且三个种子下都高于全部经典配置。
 
-A CUDA GPU is used for Task 3 if one is present and the CPU is used otherwise.
-The reported Task 3 numbers were produced on an 8 GB laptop GPU.
+## 额外做的
 
-## Data
+1. **先写预测、再做实验、最后专门剖析被推翻的两条**——报告第 3、5、6 节。
+2. **前缀长度扫描**：把表示固定为无随机性的词袋，只改可见词数，单独量出截断
+   的代价（`truncation_curve.py`）。
+3. **单位对齐的匹配对比**：BERT 的 `max_length` 数的是子词，词袋那条曲线数的
+   是词，实测 64 子词只覆盖 54 个词。按每篇文档各自被覆盖的词数截断词袋，让
+   两个模型读同一段文本（`prefix_units.py`、`matched_prefix.py`）。
+4. **多种子重复**：带随机性的配置各跑三个种子，以区间而非单点给出，并据此收回
+   了"BERT 垫底"这类经不起门槛的说法。
+5. **消融与诊断**：`min_df` 剪枝消融；判别词集的重叠、词频、语料的年份分布
+   （`topic_diagnostics.py`）。
+6. **错误分析**：按文档长度分层的错误率、一篇具体误判样例、以及"BERT 错而词袋
+   对"的差分对照（`error_analysis.py`）。
 
-Two CSVs are expected in `data/`:
+## 怎么跑
 
-| file | columns | rows |
-| --- | --- | --- |
-| `data/nyt.csv` | `text`, `label` | 11,519 |
-| `data/ag.csv` | `text` | 90,000 |
-
-They are not committed (they are course-provided and large).  `glove.6B.zip`
-is downloaded into `data/` automatically on the first Task 2 GloVe run.
-
-## Running
-
-Run from the project root.  The split must be created first — every other
-script reads it and refuses to run without it.
+需要 Python 3.12 与 [uv](https://docs.astral.sh/uv/)。在项目根目录：
 
 ```bash
-uv run python -m scripts.make_splits                        # once
+uv sync                        # PyPI 慢时可用 UV_DEFAULT_INDEX=<镜像> uv sync
+uv run python -m scripts.make_splits        # 生成划分，只需一次
 
 uv run python -m scripts.task1_bow
 uv run python -m scripts.task2_embed --variant glove
@@ -78,99 +64,25 @@ uv run python -m scripts.task2_embed --variant w2v_ag
 uv run python -m scripts.task2_embed --variant w2v_nyt
 uv run python -m scripts.task3_bert
 
-# the measurements the discussion rests on
-uv run python -m scripts.truncation_curve                   # prefix-length sweep
-uv run python -m scripts.prefix_units                       # BERT prefix: wordpieces -> words
-uv run python -m scripts.matched_prefix                     # BERT vs BoW, same words per doc
-uv run python -m scripts.error_analysis                      # needs the two *_test_predictions.csv
-uv run python -m scripts.hedge_experiments                   # length bins, leakage check, word positions
-uv run python -m scripts.topic_diagnostics                  # vocabulary / frequency / year stats
+uv run python -m scripts.truncation_curve   # 以下为上述额外分析的脚本
+uv run python -m scripts.prefix_units
+uv run python -m scripts.matched_prefix
+uv run python -m scripts.error_analysis
+uv run python -m scripts.topic_diagnostics
 
-uv run python -m scripts.collect_results                    # tables + macros
-uv run python -m scripts.make_figs                          # figures
+uv run python -m scripts.collect_results    # 从 results/ 生成报告的表与宏
+uv run python -m scripts.make_figs
+./scripts/build_report.sh                   # 重建 report/main.pdf
 ```
 
-Appendix runs, referenced in the report:
+每个脚本写一份 JSON 到 `results/`。`collect_results.py` 与 `make_figs.py` 只读
+这些文件，所以报告可以在不重训的前提下重建。
 
-```bash
-uv run python -m scripts.task1_bow --min-df 5 --suffix _mindf5
-uv run python -m scripts.task3_bert --max-len 128 --suffix _len128
-uv run python -m scripts.task3_bert --max-len 256 --suffix _len256
-uv run python -m scripts.task3_bert --max-len 512 --suffix _len512
-```
+附录实验（`--min-df 5`、`--max-len 128/256/512`）与重复运行（`--seed 7/123`）
+的参数见报告的复现说明一节。
 
-Repeated runs (the report quotes ranges, not single points, for every
-configuration with randomness):
+## 数据
 
-```bash
-for s in 7 123; do
-  uv run python -m scripts.task2_embed --variant w2v_nyt --seed $s --suffix _seed$s
-  uv run python -m scripts.task2_embed --variant w2v_ag  --seed $s --suffix _seed$s
-  uv run python -m scripts.task3_bert --seed $s --suffix _seed$s
-done
-```
-
-Each run writes one JSON to `results/`.  `collect_results.py` and
-`make_figs.py` only read those files, so the report can be rebuilt without
-re-training anything.
-
-## Building the report
-
-The report is set in the ACL conference style (`report/acl.sty`, the same
-style EMNLP and NAACL use), in `preprint` mode — author shown, page numbers
-on, no anonymous-review line numbers.
-
-It is compiled with XeLaTeX rather than pdfLaTeX, for two reasons. The body
-uses Times New Roman itself (`\usepackage{times}` would silently substitute
-the metric-compatible Nimbus Roman clone, which does not match the figures
-glyph for glyph), and the text is Chinese, which needs `xeCJK`. Times New
-Roman and SimSun are present on Windows and macOS; on a Linux machine without
-them, point `\setmainfont` / `\setCJKmainfont` at whatever equivalents are
-installed.
-
-```bash
-./scripts/build_report.sh          # regenerates tables + figures, then the PDF
-```
-
-That script runs the compiler with `report/` as the working directory, which
-is required: the source refers to `tables/` and `figs/` by relative path, so
-compiling `report/main.tex` from the project root fails to find them.
-Equivalently, by hand:
-
-```bash
-cd report
-latexmk -xelatex -outdir=build main.tex
-```
-
-## Reproducibility notes
-
-- **One split for everything.**  `scripts/make_splits.py` shuffles NYT under
-  a fixed seed and writes `splits/{train,val,test}.csv`; nothing downstream
-  re-splits.  This is what makes the six comparisons in the report valid.
-- **The vocabulary is built on the training split only**, at `min_df=1` (the
-  literal whole-training-corpus vocabulary the assignment describes).  The
-  appendix repeats Task 1 at `min_df=5` to show the choice is not
-  load-bearing.
-- **Word2Vec on NYT is trained on the training split only.**  It is an
-  unsupervised model, so training it on all of NYT would not leak labels, but
-  it would let test documents influence the vectors used to classify them.
-- **`C` is chosen on the validation split** by macro-F1; the test split is
-  read once per experiment, at the end.
-- **No class weighting.**  The classifier is identical across the five
-  non-BERT experiments; only the representation changes.  The class imbalance
-  is handled at the metric level (macro-F1) rather than by reweighting, so
-  that the comparison stays clean.
-- **Prefix lengths are converted before BERT is compared with bag-of-words.**
-  BERT's `max_length` counts wordpieces, the bag-of-words sweep counts nltk
-  words, and one word is often several wordpieces: 64 wordpieces cover about
-  54 words.  `prefix_units.py` measures the conversion and `matched_prefix.py`
-  truncates *each document* to the words BERT actually sees at that length, so
-  the two models read the same text rather than the same nominal number.
-
-## A note on the required BERT configuration
-
-The assignment fixes `max_length=64`.  The median NYT document is 672 tokens,
-so BERT sees roughly the first tenth of each article while the bag-of-words
-and mean-pooling baselines see all of it.  The required configuration is used
-as specified; the `--max-len 512` appendix run exists to separate the
-representation's contribution from the truncation's.
+`data/nyt.csv`（11,519 篇，含 `text`/`label`）与 `data/ag.csv`（90,000 篇，
+含 `text`）由课程提供，已随仓库提交。`glove.6B.zip` 体积 862MB，超出 GitHub
+单文件上限，未提交，首次运行 Task 2 的 GloVe 时自动下载。
