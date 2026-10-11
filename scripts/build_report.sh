@@ -58,4 +58,8 @@ if grep -qE '^!' build/main.log; then
     exit 1
 fi
 
-echo "wrote $root/report/build/main.pdf"
+# Keep a copy at a stable, committed path.  report/build/ is gitignored
+# (it holds .aux/.log and a rebuild regenerates everything), but the PDF is
+# the thing the assignment asks for, so it cannot live only there.
+cp build/main.pdf main.pdf
+echo "wrote $root/report/main.pdf"
